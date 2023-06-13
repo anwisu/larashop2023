@@ -80,7 +80,7 @@
 
             <li class="nav-link"><a href="{{ route('shoppingCart') }}">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
-                <span class="badge badge-secondary">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
+                <span class="badge badge-info">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
                 </a>
             </li>
         </ul>

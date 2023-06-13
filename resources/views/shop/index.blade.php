@@ -32,7 +32,7 @@
                     @endforeach                
                 </div>
         </div>
-        <div>{{ $items->links() }}</div>
+        <div>{{ $items->links('vendor.pagination.bootstrap-4') }}</div>
     </div>
 @endsection
 
