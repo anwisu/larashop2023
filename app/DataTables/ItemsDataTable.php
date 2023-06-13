@@ -103,7 +103,7 @@ class ItemsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Items_' . date('YmdHis');
     }
