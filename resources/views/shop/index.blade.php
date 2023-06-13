@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="m-4">
-        <div class="container-fluid container-lg">
             @if (Session::has('success'))
             <div class="alert alert-success  alert-dismissible fade show" role="alert">
                 <strong>{{Session::get('success')}}</strong>
@@ -31,8 +30,7 @@
                         </div>
                     @endforeach                
                 </div>
-        </div>
-        <div>{{ $items->links('vendor.pagination.bootstrap-4') }}</div>
+        <div class="d-flex justify-content-center">{{ $items->links('vendor.pagination.bootstrap-4') }}</div>
     </div>
 @endsection
 
