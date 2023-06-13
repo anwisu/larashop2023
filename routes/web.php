@@ -33,6 +33,7 @@ Route::get('/shopping-cart', [ItemController::class, 'getCart'])->name('shopping
 Route::get('remove/{id}',[ItemController::class, 'removeItem'])->name('item.remove');
 Route::get('reduce/{id}',[ItemController::class, 'getReduceByOne'])->name('item.reduceByOne');
 Route::get('checkout',[ItemController::class, 'postCheckout'])->name('checkout');
+Route::post('item/store-media', [ItemController::class, 'storeMedia'])->name('item.storeMedia')->middleware('role:admin');
 
 Auth::routes();
 

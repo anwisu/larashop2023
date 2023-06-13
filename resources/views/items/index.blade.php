@@ -4,6 +4,7 @@
 <div class="m-4">
     <div class="container-fluid container-lg">
         @include('layouts.flash-messages')
+        <a href="{{route('item.create')}}" class="btn btn-primary btn-lg " role="button" aria-disabled="true">Add Item</a>
         <div class="col-xs-6">
             <form method="post" enctype="multipart/form-data" action="{{ route('item-import') }}">
                 {{ csrf_field() }}

@@ -4,21 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\Models\Media;
 use App\Models\Order;
 
-class Item extends Model
+class Item extends Model implements HasMedia
 {
     use HasFactory;
-    protected $table = 'item';
+    use InteractsWithMedia;
+
+    protected $table = 'item'; 
     protected $primaryKey = 'item_id';
+    public $fillable = ['description', 'sell_price', 'cost_price', 'image_path'];
     
+
     public function orders()
     {
-        return $this->belongsToMany(Order::class, 'orderline', 'item_id', 'orderinfo_id');
+        return $this->belongsToMany(Order::class, 'orderline', 'item_id', 'orderinfo_id')->withPivot('quantity');
     }
 
-    public function stock() 
+    public function stock()
     {
-        return $this->hasOne(Stock::class, 'item_id');
+        return $this->hasOne(Stock::class,'item_id');
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->sharpen(10);
     }
 }
