@@ -40,7 +40,7 @@ class SendOrderStatus extends Mailable
         );
 
         return $this->from('noreplay@larashop.test', 'no reply')
-            ->subject('order status')
+            ->subject('Order Receipt')
             ->view('email.order_status')
             ->with([
                 'order' => $this->order,
