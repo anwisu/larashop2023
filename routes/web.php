@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +35,7 @@ Route::get('remove/{id}',[ItemController::class, 'removeItem'])->name('item.remo
 Route::get('reduce/{id}',[ItemController::class, 'getReduceByOne'])->name('item.reduceByOne');
 Route::get('checkout',[ItemController::class, 'postCheckout'])->name('checkout');
 Route::post('item/store-media', [ItemController::class, 'storeMedia'])->name('item.storeMedia')->middleware('role:admin');
-
+Route::post('/search', [SearchController::class,'search'])->name('search');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

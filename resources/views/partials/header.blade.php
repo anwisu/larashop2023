@@ -78,14 +78,15 @@
             </div>
             </li>
 
-            <li class="nav-link"><a href="{{ route('shoppingCart') }}">
+            <li class="nav-link"><a href="{{ route('shoppingCart') }}" >
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
                 <span class="badge badge-info">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}"  method="POST">
+            @csrf
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="term">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>

@@ -81,8 +81,8 @@ class ItemsDataTable extends DataTable
         return [
             Column::make('item_id'),
             Column::computed('images')
-                ->exportable(false)
-                ->printable(false)
+                ->exportable(true)
+                ->printable(true)
                 ->width(60)
                 ->addClass('text-center'),
             Column::make('title'),
