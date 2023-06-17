@@ -60,12 +60,12 @@ class ItemController extends Controller
         );
     }
 
-    public function show($id)
-    {
-        $item = Item::find($id);
+    // public function show($id)
+    // {
+    //     $item = Item::find($id);
 
-        return view('items.show', compact("item"));
-    }
+    //     return view('items.show', compact("item"));
+    // }
 
     public function index(ItemsDataTable $dataTable)
     {

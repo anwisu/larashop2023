@@ -9,16 +9,16 @@ use Spatie\Searchable\Search;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
-    {
-        $searchResults = (new Search())
-            ->registerModel(Item::class, ['title', 'description'])
-            ->registerModel(Customer::class, ['fname', 'lname'])
-            ->search(trim($request->term));
-        // dd($searchResults);
+    // public function search(Request $request)
+    // {
+    //     $searchResults = (new Search())
+    //         ->registerModel(Item::class, ['title', 'description'])
+    //         ->registerModel(Customer::class, ['fname', 'lname'])
+    //         ->search(trim($request->term));
+    //     // dd($searchResults);
 
-        return view('search', compact("searchResults"));
-    }
+    //     return view('search', compact("searchResults"));
+    // }
 
     /**
      * Display a listing of the resource.

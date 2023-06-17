@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
 use App\Models\User;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
 
-class Customer extends Model implements Searchable
+class Customer extends Model
 {
     use HasFactory;
     protected $table = 'customer';
@@ -26,14 +24,14 @@ class Customer extends Model implements Searchable
         return $this->belongsTo(User::class);
     }
 
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('customer.show', $this->customer_id);
+    // public function getSearchResult(): SearchResult
+    // {
+    //     $url = route('customer.show', $this->customer_id);
     
-        return new \Spatie\Searchable\SearchResult(
-            $this,
-            $this->fname,
-            $url
-        );
-    }
+    //     return new \Spatie\Searchable\SearchResult(
+    //         $this,
+    //         $this->fname,
+    //         $url
+    //     );
+    // }
 }

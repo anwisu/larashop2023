@@ -1,4 +1,4 @@
-@extends('layouts.master')
+{{-- @extends('layouts.master')
 @section('title')
     laravel shopping cart
 @endsection
@@ -18,4 +18,4 @@
         </ul>
     @endforeach
     @endforeach
-@endsection
+@endsection --}}

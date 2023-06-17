@@ -8,11 +8,9 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 // use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
 use App\Models\Order;
 
-class Item extends Model implements HasMedia, Searchable 
+class Item extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -40,14 +38,14 @@ class Item extends Model implements HasMedia, Searchable
             ->sharpen(10);
     }
 
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('item.show', $this->item_id);
+    // public function getSearchResult(): SearchResult
+    // {
+    //     $url = route('item.show', $this->item_id);
     
-        return new \Spatie\Searchable\SearchResult(
-            $this,
-            $this->title,
-            $url
-        );
-    }
+    //     return new \Spatie\Searchable\SearchResult(
+    //         $this,
+    //         $this->title,
+    //         $url
+    //     );
+    // }
 }
