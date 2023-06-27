@@ -27,11 +27,24 @@ use App\Events\OrderCreated;
 
 
 
+
 class ItemController extends Controller
 {
     public function create()
     {
         return view('items.create');
+    }
+
+    public function index()
+    {
+        $items = Item::all();
+        return response()->json($items);
+    }
+
+    public function edit($id)
+    {
+        $item = Item::find($id);
+        return response()->json($id);
     }
 
     public function store(Request $request)
@@ -43,7 +56,7 @@ class ItemController extends Controller
         $item->description = trim($request->description);
         $item->sell_price = $request->sell;
         $item->cost_price = $request->cost;
-        $item->image_path = $request->cost;
+        $item->image_path = $request->image_path;
         $item->save();
         
         
@@ -54,22 +67,36 @@ class ItemController extends Controller
                     ->toMediaCollection("images");
             }
         }
-        return Redirect::to("item")->with(
+        return repsonse()->json([
             "success",
-            "Item added successfully!"
-        );
+            "Item added successfully!","item" => $item, "status" => 200
+        ]);
     }
 
-    // public function show($id)
-    // {
-    //     $item = Item::find($id);
+    public function update(Request $request, $id) {
+        $item = Item::find($id);
+        $item->title = $request->title;
+        $item->description = trim($request->description);
+        $item->sell_price = $request->sell;
+        $item->cost_price = $request->cost;
 
-    //     return view('items.show', compact("item"));
-    // }
+        if($request->document !== null) { 
+            foreach ($request->input("document", []) as $file) {
+                $item
+                    ->addMedia(storage_path("item/images/" . $file))
+                    ->toMediaCollection("images");
+            }
+        }
+        return repsonse()->json([
+            "success",
+            "Item added successfully!","item" => $item, "status" => 200
+        ]);
+    }
 
-    public function index(ItemsDataTable $dataTable)
+    public function destroy($id)
     {
-        return $dataTable->render('items.index');
+        $item = Item::find($id);
+        return response()->json(['message' => 'item deleted', "status" => 204]);
     }
 
     public function getItems(){
@@ -80,20 +107,59 @@ class ItemController extends Controller
         return view('shop.index', compact('items'));
     }
 
-    public function edit($id)
-    {
-        $item = Item::find($id);
-        $images = $item->getMedia('images');
-        // dd($images);
-        // foreach($images as $image) {
-        //     if($image[0] !== null) {
-        //         DebugBar::info($image[0]->getPath());
-        //     }
-        //     // DebugBar::info($image[0]);
-        // }
 
-        return view('items.edit', compact('item', 'images'));
-    }
+    // public function store(Request $request)
+    // {
+    //     $input = $request->all();
+        
+    //     $item = new Item();
+    //     $item->title = $request->title;
+    //     $item->description = trim($request->description);
+    //     $item->sell_price = $request->sell;
+    //     $item->cost_price = $request->cost;
+    //     $item->image_path = $request->image_path;
+    //     $item->save();
+        
+        
+    //     if($request->document !== null) { 
+    //         foreach ($request->input("document", []) as $file) {
+    //             $item
+    //                 ->addMedia(storage_path("item/images/" . $file))
+    //                 ->toMediaCollection("images");
+    //         }
+    //     }
+    //     return Redirect::to("item")->with(
+    //         "success",
+    //         "Item added successfully!"
+    //     );
+    // }
+
+    // public function show($id)
+    // {
+    //     $item = Item::find($id);
+
+    //     return view('items.show', compact("item"));
+    // }
+
+    // public function index(ItemsDataTable $dataTable)
+    // {
+    //     return $dataTable->render('items.index');
+    // }
+
+        // public function edit($id)
+    // {
+    //     $item = Item::find($id);
+    //     $images = $item->getMedia('images');
+    //     // dd($images);
+    //     // foreach($images as $image) {
+    //     //     if($image[0] !== null) {
+    //     //         DebugBar::info($image[0]->getPath());
+    //     //     }
+    //     //     // DebugBar::info($image[0]);
+    //     // }
+
+    //     return view('items.edit', compact('item', 'images'));
+    // }
 
     public function addToCart($id){
         // dd( $id);
